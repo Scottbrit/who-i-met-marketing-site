@@ -60,10 +60,15 @@
             
             function applyVariant() {
                 if (variant === 'dumbest-crm') {
-                    // Update headline
+                    // Update badge
                     var badge = document.getElementById('hero-badge');
                     if (badge) {
-                        badge.textContent = 'The Dumbest Personal CRM Ever';
+                        badge.textContent = 'Your calendar already knows your network';
+                    }
+                    // Update h1 headline
+                    var headline = document.getElementById('hero-headline');
+                    if (headline) {
+                        headline.innerHTML = 'The Dumbest Personal CRM Ever <span class="emoji">📇</span>';
                     }
                     // Update subtitle
                     var subtitle = document.getElementById('hero-subtitle');
@@ -1204,7 +1209,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="badge fade-in" id="hero-badge">Your calendar already knows your network</div>
-        <h1 class="fade-in">Your personal CRM <span class="emoji">📇</span> that builds itself</h1>
+        <h1 class="fade-in" id="hero-headline">Your personal CRM <span class="emoji">📇</span> that builds itself</h1>
         <p class="fade-in" id="hero-subtitle">Who I Met automatically extracts every person you've met from your Google Calendar. See who you know, when you connected, and how often you met—without typing a thing.</p>
         <div class="hero-cta fade-in">
             <a href="https://app.whoimet.com/login" class="btn btn-primary btn-large">Connect Your Calendar Free</a>
