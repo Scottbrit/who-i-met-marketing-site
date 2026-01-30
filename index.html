@@ -47,6 +47,32 @@
         posthog.init('phc_bgDvtfCAgyf4GDe9E2gvXPr5TK8b96aFqp139HsBRn6', {api_host: 'https://us.i.posthog.com'})
     </script>
 
+    <!-- A/B Test: Hero Copy -->
+    <script>
+        posthog.onFeatureFlags(function() {
+            var variant = posthog.getFeatureFlag('hero-copy-test');
+            
+            if (variant === 'dumbest-crm') {
+                // Update headline
+                var badge = document.getElementById('hero-badge');
+                if (badge) {
+                    badge.textContent = 'The Dumbest Personal CRM Ever';
+                }
+                // Update subtitle
+                var subtitle = document.getElementById('hero-subtitle');
+                if (subtitle) {
+                    subtitle.innerHTML = 'Your network, extracted from your calendar in 60 seconds 🤯. That\'s The App.';
+                }
+            }
+            
+            // Track which variant was shown
+            posthog.capture('ab_test_impression', {
+                test_name: 'hero-copy-test',
+                variant: variant || 'control'
+            });
+        });
+    </script>
+
     <title>Who I Met - Your Personal CRM That Builds Itself</title>
     <meta name="description" content="Automatically extract contacts from your Google Calendar meetings. Build a personal CRM without manual data entry. Track who you met, when, and how often.">
 
@@ -1162,9 +1188,9 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="badge fade-in">Your calendar already knows your network</div>
+        <div class="badge fade-in" id="hero-badge">Your calendar already knows your network</div>
         <h1 class="fade-in">Your personal CRM <span class="emoji">📇</span> that builds itself</h1>
-        <p class="fade-in">Who I Met automatically extracts every person you've met from your Google Calendar. See who you know, when you connected, and how often you met—without typing a thing.</p>
+        <p class="fade-in" id="hero-subtitle">Who I Met automatically extracts every person you've met from your Google Calendar. See who you know, when you connected, and how often you met—without typing a thing.</p>
         <div class="hero-cta fade-in">
             <a href="https://app.whoimet.com/login" class="btn btn-primary btn-large">Connect Your Calendar Free</a>
         </div>
