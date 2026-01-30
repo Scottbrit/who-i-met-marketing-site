@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your Personal Network - Professional Networking Tool | WhoIMetWith</title>
+    <meta name="description" content="Build and maintain a powerful professional network without the hustle. WhoIMetWith tracks everyone you meet through your calendar, so you can focus on building real relationships.">
+    <meta name="keywords" content="build personal network, professional networking, networking tool, manage professional relationships, grow your network, relationship building">
+
+    <meta property="og:title" content="Build Your Personal Network the Right Way">
+    <meta property="og:description" content="Your network builds itself through the meetings you already have. WhoIMetWith helps you track, nurture, and grow those relationships.">
+    <meta property="og:type" content="website">
+
+    <link rel="canonical" href="https://whoimetwith.com/use-cases/build-personal-network">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .hero {
+            padding: 8rem 2rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .content h2 {
+            font-size: 1.75rem;
+            margin: 3rem 0 1rem;
+            color: var(--secondary);
+        }
+
+        .content h3 {
+            font-size: 1.25rem;
+            margin: 2rem 0 0.75rem;
+            color: var(--secondary);
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+        }
+
+        .content ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: var(--surface);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box h4 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            font-size: 1.125rem;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .network-stages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stage-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .stage-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .stage-number {
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .network-visual {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .network-visual h4 {
+            margin-bottom: 1rem;
+        }
+
+        .circles {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .circle {
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .circle.inner { width: 100px; height: 100px; background: var(--primary); font-size: 0.75rem; }
+        .circle.middle { width: 140px; height: 140px; background: #60a5fa; font-size: 0.8rem; }
+        .circle.outer { width: 180px; height: 180px; background: #93c5fd; font-size: 0.85rem; color: var(--secondary); }
+
+        .cta-section {
+            background: var(--secondary);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            background: var(--surface);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 6rem 1rem 3rem; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Build Your Personal Network: A Guide to Professional Relationship Building",
+        "description": "Learn how to build and maintain a powerful professional network using WhoIMetWith.",
+        "author": {
+            "@type": "Organization",
+            "name": "WhoIMetWith"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">WhoIMet<span>With</span></a>
+            <a href="/signup" class="btn btn-primary">Start Free</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="breadcrumb">
+            <a href="/">Home</a> / <a href="/use-cases">Use Cases</a> / Build Personal Network
+        </div>
+        <h1>Build a Network That Actually Works for You</h1>
+        <p class="subtitle">Your network isn't a number—it's the relationships you've invested in. WhoIMetWith helps you see, understand, and nurture the connections that matter.</p>
+        <a href="/signup" class="btn btn-primary">Start Building Your Network</a>
+    </section>
+
+    <article class="content">
+        <div class="quote-box">
+            "Your network is your net worth—but only if you can remember who's in it."
+        </div>
+
+        <h2>The Networking Paradox</h2>
+        <p>Everyone tells you to "build your network." Attend events. Take coffee meetings. Connect on LinkedIn. But then what?</p>
+
+        <p>You meet interesting people. You have great conversations. You swap contact info and promise to "stay in touch." Three months later, you can't remember their name, what you talked about, or why you were excited to meet them.</p>
+
+        <p>This is the networking paradox: the act of meeting people is easy, but the act of maintaining relationships is hard. Without a system, connections fade. Opportunities disappear. Your "network" becomes a graveyard of forgotten conversations.</p>
+
+        <h2>What Makes a Network Valuable?</h2>
+        <p>A powerful network isn't about quantity—it's about maintained relationships. Consider:</p>
+
+        <ul>
+            <li><strong>100 contacts you can't remember</strong> = essentially worthless</li>
+            <li><strong>20 contacts you have context on</strong> = actually useful</li>
+            <li><strong>10 contacts you regularly nurture</strong> = genuinely powerful</li>
+        </ul>
+
+        <p>The goal isn't to meet more people. It's to remember and nurture the people you've already met. That's where WhoIMetWith comes in.</p>
+
+        <h2>How WhoIMetWith Helps You Build Your Network</h2>
+
+        <div class="network-stages">
+            <div class="stage-card">
+                <h4><span class="stage-number">1</span> Capture</h4>
+                <p>Every meeting in your calendar becomes a tracked relationship. No manual entry. No forgotten contacts. Your network builds itself from conversations you're already having.</p>
+            </div>
+            <div class="stage-card">
+                <h4><span class="stage-number">2</span> Understand</h4>
+                <p>See who you've met, when you first connected, and how often you've interacted. Understand the depth and history of each relationship at a glance.</p>
+            </div>
+            <div class="stage-card">
+                <h4><span class="stage-number">3</span> Organize</h4>
+                <p>Create lists to segment your network: industry peers, potential collaborators, mentors, people to reconnect with. Structure brings clarity.</p>
+            </div>
+            <div class="stage-card">
+                <h4><span class="stage-number">4</span> Enrich</h4>
+                <p>Fill in the gaps with professional data. LinkedIn profiles, current roles, company info. Know who you're talking to before you reach out.</p>
+            </div>
+        </div>
+
+        <h2>Your Network Has Layers</h2>
+        <p>Think of your professional network as concentric circles:</p>
+
+        <div class="network-visual">
+            <h4>Network Relationship Tiers</h4>
+            <div class="circles">
+                <div class="circle outer">Acquaintances<br>(Met 1-2x)</div>
+                <div class="circle middle">Active Contacts<br>(Regular interaction)</div>
+                <div class="circle inner">Inner Circle<br>(Strong ties)</div>
+            </div>
+        </div>
+
+        <p>WhoIMetWith helps you visualize these layers through meeting frequency data:</p>
+        <ul>
+            <li><strong>Met once:</strong> Acquaintances—potential to develop</li>
+            <li><strong>Met 2-5 times:</strong> Building relationship—worth nurturing</li>
+            <li><strong>Met 5+ times:</strong> Strong connection—your active network</li>
+        </ul>
+
+        <p>Sort by meeting count to see who your strongest relationships are with. Sort by "last met" to identify relationships that might be fading.</p>
+
+        <h2>The Compound Effect of Maintained Relationships</h2>
+        <p>Relationships compound like interest. A contact you met once and forgot about has zero value. A contact you've maintained over years becomes someone who:</p>
+
+        <ul>
+            <li>Thinks of you when opportunities arise</li>
+            <li>Introduces you to their network</li>
+            <li>Provides advice and support</li>
+            <li>Champions your work to others</li>
+        </ul>
+
+        <p>But you can't maintain what you can't remember. WhoIMetWith gives you the foundation: a complete record of everyone you've met, so you can be intentional about who you nurture.</p>
+
+        <h2>Practical Network-Building Workflows</h2>
+
+        <div class="highlight-box">
+            <h4>Weekly Network Review (15 mins)</h4>
+            <p>Once a week, open WhoIMetWith and review your contacts. Who did you meet recently? Anyone you should follow up with? Any relationships going cold that you want to revive? A quick scan keeps your network top of mind.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>Pre-Meeting Prep</h4>
+            <p>Before any meeting, check your history with that person. When did you first meet? How many times have you talked? What meetings have you had together? Walk in with full context instead of scrambling to remember.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>Quarterly Reconnection</h4>
+            <p>Each quarter, filter your contacts by "last met" to find people you haven't talked to in 3+ months. Create a "Reconnect" list. Work through it with personal outreach: "It's been a while since we connected—how have things been?"</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>Network Mapping</h4>
+            <p>Use lists to map your network by category: mentors, peers, potential clients, industry experts, personal friends. Seeing your network structured helps you identify gaps and opportunities.</p>
+        </div>
+
+        <h2>Quality Over Quantity, Always</h2>
+        <p>WhoIMetWith won't tell you to attend more networking events or send more cold messages. Instead, it helps you maximize the relationships you already have—people who've already invested time with you.</p>
+
+        <p>The best network-builders aren't the ones meeting the most new people. They're the ones who remember names, recall context, follow up thoughtfully, and maintain relationships over time.</p>
+
+        <p>That's what WhoIMetWith enables: being the kind of person people want in their network, because you actually remember and care about the relationship.</p>
+
+        <h2>Start With What You Have</h2>
+        <p>You don't need to start from scratch. Your calendar contains months or years of relationship history. Every meeting you've had represents a connection made, a conversation shared, a potential relationship to nurture.</p>
+
+        <p>Connect WhoIMetWith to your calendar and instantly see your existing network laid out in front of you. Then start building from a foundation of real relationships, not networking fantasies.</p>
+    </article>
+
+    <section class="cta-section">
+        <h2>Your Network Is Bigger Than You Think</h2>
+        <p>You've already done the hard work of meeting people. Now see who you actually know.</p>
+        <a href="/signup" class="btn btn-primary">Discover Your Network Free</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 WhoIMetWith. All rights reserved.</p>
+    </footer>
+</body>
+</html>

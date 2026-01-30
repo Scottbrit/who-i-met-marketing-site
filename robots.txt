@@ -1,0 +1,26 @@
+# robots.txt for WhoIMetWith
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://whoimetwith.com/sitemap.xml
+
+# Disallow admin and private routes
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /app/
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /

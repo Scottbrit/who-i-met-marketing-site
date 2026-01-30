@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrich Your Contacts - Add LinkedIn & Company Data | WhoIMetWith</title>
+    <meta name="description" content="Turn email addresses into complete professional profiles. WhoIMetWith contact enrichment adds LinkedIn profiles, job titles, company info, and bios to your contacts automatically.">
+    <meta name="keywords" content="contact enrichment, enrich contacts, contact data enrichment, LinkedIn profile lookup, find contact information, professional data enrichment">
+
+    <meta property="og:title" content="Enrich Your Contacts with Professional Data">
+    <meta property="og:description" content="Only have an email? Get LinkedIn profiles, job titles, company info, and more. Pay only for what you use.">
+    <meta property="og:type" content="website">
+
+    <link rel="canonical" href="https://whoimetwith.com/use-cases/enrich-contacts">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .hero {
+            padding: 8rem 2rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .content h2 {
+            font-size: 1.75rem;
+            margin: 3rem 0 1rem;
+            color: var(--secondary);
+        }
+
+        .content h3 {
+            font-size: 1.25rem;
+            margin: 2rem 0 0.75rem;
+            color: var(--secondary);
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+        }
+
+        .content ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: var(--surface);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box h4 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .before-after {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .contact-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .contact-card.before {
+            opacity: 0.7;
+        }
+
+        .contact-card.after {
+            border-color: var(--success);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .contact-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .avatar.filled {
+            background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+        }
+
+        .contact-card h4 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .contact-card .email {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .contact-card .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: #dcfce7;
+            color: #166534;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .contact-details {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-detail {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .contact-detail .label {
+            color: var(--text-muted);
+            min-width: 80px;
+        }
+
+        .missing {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .pricing-card h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .pricing-card .credits {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card .per-credit {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .data-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--surface);
+            border-radius: 8px;
+        }
+
+        .data-icon {
+            font-size: 1.5rem;
+        }
+
+        .data-item h5 {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .data-item p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .cta-section {
+            background: var(--secondary);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            background: var(--surface);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 6rem 1rem 3rem; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Contact Enrichment: Add Professional Data to Your Contacts",
+        "description": "Learn how WhoIMetWith contact enrichment turns basic contact info into complete professional profiles.",
+        "author": {
+            "@type": "Organization",
+            "name": "WhoIMetWith"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">WhoIMet<span>With</span></a>
+            <a href="/signup" class="btn btn-primary">Start Free</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="breadcrumb">
+            <a href="/">Home</a> / <a href="/use-cases">Use Cases</a> / Enrich Contacts
+        </div>
+        <h1>Turn Email Addresses Into Complete Profiles</h1>
+        <p class="subtitle">You have their email from the calendar invite. Now get their LinkedIn, company, job title, and professional bio—without hours of manual research.</p>
+        <a href="/signup" class="btn btn-primary">Try Contact Enrichment</a>
+    </section>
+
+    <article class="content">
+        <h2>Before and After Enrichment</h2>
+        <p>Here's what contact enrichment actually does:</p>
+
+        <div class="before-after">
+            <div class="contact-card before">
+                <div class="contact-card-header">
+                    <div class="avatar">?</div>
+                    <div>
+                        <h4>sarah.chen@techstartup.io</h4>
+                        <span class="email">From calendar invite</span>
+                    </div>
+                </div>
+                <div class="contact-details">
+                    <div class="contact-detail">
+                        <span class="label">Name:</span>
+                        <span class="missing">Unknown</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="label">Title:</span>
+                        <span class="missing">Unknown</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="label">Company:</span>
+                        <span class="missing">Unknown</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="label">LinkedIn:</span>
+                        <span class="missing">Unknown</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-card after">
+                <div class="contact-card-header">
+                    <div class="avatar filled">SC</div>
+                    <div>
+                        <h4>Sarah Chen</h4>
+                        <span class="email">sarah.chen@techstartup.io</span>
+                        <span class="badge">Enriched</span>
+                    </div>
+                </div>
+                <div class="contact-details">
+                    <div class="contact-detail">
+                        <span class="label">Title:</span>
+                        <span>VP of Product</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="label">Company:</span>
+                        <span>TechStartup (Series B, 150 employees)</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="label">LinkedIn:</span>
+                        <span>linkedin.com/in/sarahchen</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="label">Bio:</span>
+                        <span>Former PM at Stripe, Stanford MBA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>What Data Do You Get?</h2>
+        <p>WhoIMetWith enrichment uses industry-leading data providers to fill in professional information:</p>
+
+        <div class="data-grid">
+            <div class="data-item">
+                <span class="data-icon">👤</span>
+                <div>
+                    <h5>Full Name</h5>
+                    <p>First and last name</p>
+                </div>
+            </div>
+            <div class="data-item">
+                <span class="data-icon">💼</span>
+                <div>
+                    <h5>Job Title</h5>
+                    <p>Current role and seniority</p>
+                </div>
+            </div>
+            <div class="data-item">
+                <span class="data-icon">🏢</span>
+                <div>
+                    <h5>Company Info</h5>
+                    <p>Name, size, industry</p>
+                </div>
+            </div>
+            <div class="data-item">
+                <span class="data-icon">🔗</span>
+                <div>
+                    <h5>LinkedIn Profile</h5>
+                    <p>Direct profile URL</p>
+                </div>
+            </div>
+            <div class="data-item">
+                <span class="data-icon">📝</span>
+                <div>
+                    <h5>Professional Bio</h5>
+                    <p>Background and experience</p>
+                </div>
+            </div>
+            <div class="data-item">
+                <span class="data-icon">📍</span>
+                <div>
+                    <h5>Location</h5>
+                    <p>City and region</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>When to Use Enrichment</h2>
+        <p>You don't need to enrich every contact. Here's when enrichment is most valuable:</p>
+
+        <div class="highlight-box">
+            <h4>Before Important Meetings</h4>
+            <p>Meeting someone new tomorrow? Enrich their profile today. Walk in knowing their background, current role, and career history. First impressions matter—show up prepared.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>Preparing for Outreach</h4>
+            <p>Before reaching out to reconnect, enrich the contact to see their current situation. Did they change jobs? Get promoted? This context shapes your message and shows you care.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>Building Target Lists</h4>
+            <p>Creating a list of prospects, investors, or potential partners? Enrich the whole list to segment by company size, seniority, or industry. Better targeting means better results.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>Identifying Decision Makers</h4>
+            <p>Met multiple people from the same company? Enrich their profiles to understand org structure. Know who the decision-makers are and who influences them.</p>
+        </div>
+
+        <h2>Simple, Transparent Pricing</h2>
+        <p>Buy credits when you need them. No subscription required. Credits never expire.</p>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h4>Starter</h4>
+                <div class="price">$15</div>
+                <div class="credits">50 credits</div>
+                <div class="per-credit">$0.30 per enrichment</div>
+            </div>
+            <div class="pricing-card" style="border-color: var(--primary);">
+                <h4>Standard</h4>
+                <div class="price">$35</div>
+                <div class="credits">150 credits</div>
+                <div class="per-credit">$0.23 per enrichment</div>
+            </div>
+            <div class="pricing-card">
+                <h4>Power</h4>
+                <div class="price">$99</div>
+                <div class="credits">500 credits</div>
+                <div class="per-credit">$0.20 per enrichment</div>
+            </div>
+        </div>
+
+        <p><strong>Note:</strong> The core WhoIMetWith features—calendar sync, contact tracking, lists, and export—are completely free. Enrichment is optional for when you need additional professional data.</p>
+
+        <h2>How Enrichment Works</h2>
+
+        <h3>1. Select Contacts to Enrich</h3>
+        <p>From your contact list, select individuals you want to enrich. You can enrich one at a time or select multiple for bulk enrichment.</p>
+
+        <h3>2. We Fetch the Data</h3>
+        <p>WhoIMetWith queries professional data providers using the contact's email address. Within seconds, we pull available professional information.</p>
+
+        <h3>3. Profile Gets Updated</h3>
+        <p>The contact's profile is automatically updated with enriched data. You'll see their full name, current job title, company details, LinkedIn profile, and bio.</p>
+
+        <h3>4. One Credit Per Enrichment</h3>
+        <p>Each successful enrichment uses one credit. If we can't find data for an email address, you won't be charged.</p>
+
+        <h2>Data Quality You Can Trust</h2>
+        <p>We use the same data providers trusted by sales teams at leading companies:</p>
+        <ul>
+            <li><strong>High match rates:</strong> Professional email addresses typically have 80%+ match rates</li>
+            <li><strong>Fresh data:</strong> Information is regularly updated to reflect job changes</li>
+            <li><strong>Privacy compliant:</strong> All data is sourced from publicly available professional information</li>
+            <li><strong>No charge for misses:</strong> If we can't find data, you keep your credit</li>
+        </ul>
+
+        <h2>Stop Googling, Start Knowing</h2>
+        <p>Every minute you spend manually researching a contact is a minute you could spend building the relationship. Enrichment gives you professional context instantly, so you can focus on what matters: meaningful conversations with prepared insights.</p>
+
+        <p>Start with the free tier—sync your calendar, see all your contacts, organize them into lists. When you need deeper professional data on key contacts, enrichment is there. Pay only for what you use.</p>
+    </article>
+
+    <section class="cta-section">
+        <h2>Know Who You're Talking To</h2>
+        <p>Turn email addresses into complete professional profiles. Start free, enrich when you need to.</p>
+        <a href="/signup" class="btn btn-primary">Get Started Free</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 WhoIMetWith. All rights reserved.</p>
+    </footer>
+</body>
+</html>

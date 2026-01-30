@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your Product Launch List From People You Know | WhoIMetWith</title>
+    <meta name="description" content="Your best launch list is people you've actually talked to. WhoIMetWith helps you build a warm launch list from your calendar contacts—people who already know you.">
+    <meta name="keywords" content="build launch list, product launch contacts, warm launch list, startup launch list, launch day contacts, product hunt launch">
+
+    <meta property="og:title" content="Build a Launch List From Your Calendar Contacts">
+    <meta property="og:description" content="Your warmest leads are people you've already met. Turn your meeting history into a powerful launch list.">
+    <meta property="og:type" content="website">
+
+    <link rel="canonical" href="https://whoimetwith.com/use-cases/build-launch-list">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .hero {
+            padding: 8rem 2rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .content h2 {
+            font-size: 1.75rem;
+            margin: 3rem 0 1rem;
+            color: var(--secondary);
+        }
+
+        .content h3 {
+            font-size: 1.25rem;
+            margin: 2rem 0 0.75rem;
+            color: var(--secondary);
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+        }
+
+        .content ul, .content ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: var(--surface);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box h4 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box h4 {
+            margin-bottom: 0.5rem;
+            color: #92400e;
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            margin: 2rem 0;
+            padding: 0;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .step-list h4 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .comparison-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-item {
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .comparison-item.cold {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+
+        .comparison-item.warm {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+
+        .comparison-item h4 {
+            margin-bottom: 0.75rem;
+        }
+
+        .comparison-item.cold h4 { color: #dc2626; }
+        .comparison-item.warm h4 { color: #16a34a; }
+
+        .cta-section {
+            background: var(--secondary);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            background: var(--surface);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 6rem 1rem 3rem; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Build Your Product Launch List From Calendar Contacts",
+        "description": "How to build a warm launch list from people you've already met using WhoIMetWith.",
+        "author": {
+            "@type": "Organization",
+            "name": "WhoIMetWith"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">WhoIMet<span>With</span></a>
+            <a href="/signup" class="btn btn-primary">Start Free</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="breadcrumb">
+            <a href="/">Home</a> / <a href="/use-cases">Use Cases</a> / Build Launch List
+        </div>
+        <h1>Your Best Launch List Already Exists</h1>
+        <p class="subtitle">Forget cold outreach. The most powerful launch list is people you've already met—and they're all in your calendar. WhoIMetWith helps you find and organize them.</p>
+        <a href="/signup" class="btn btn-primary">Build Your Launch List Free</a>
+    </section>
+
+    <article class="content">
+        <h2>The Launch List Problem</h2>
+        <p>You're launching something new. You need people to try it, share it, upvote it, provide feedback. Where do you start?</p>
+
+        <p>Most founders default to cold outreach—Twitter DMs, LinkedIn spam, email blasts to purchased lists. Response rates are abysmal. You're competing with every other launch for attention from people who don't know you.</p>
+
+        <p>But here's the thing: over the past year, you've probably met hundreds of people through calls, meetings, and coffees. These people already know who you are. They've invested time talking with you. They're infinitely more likely to support your launch than a stranger.</p>
+
+        <p>The problem? Those contacts are scattered across months of calendar entries. Finding them feels like archaeological excavation.</p>
+
+        <h2>Cold List vs. Warm List: The Numbers Don't Lie</h2>
+
+        <div class="comparison-box">
+            <div class="comparison-item cold">
+                <h4>Cold Outreach</h4>
+                <ul>
+                    <li>2-5% response rate</li>
+                    <li>Feels spammy to recipients</li>
+                    <li>Takes huge volume to get results</li>
+                    <li>Damages your reputation</li>
+                    <li>Low-quality engagement</li>
+                </ul>
+            </div>
+            <div class="comparison-item warm">
+                <h4>Warm Outreach (People You've Met)</h4>
+                <ul>
+                    <li>30-50%+ response rate</li>
+                    <li>Personal and welcomed</li>
+                    <li>Smaller list, bigger impact</li>
+                    <li>Strengthens relationships</li>
+                    <li>Genuine support and feedback</li>
+                </ul>
+            </div>
+        </div>
+
+        <p>A warm list of 200 people who actually know you will outperform a cold list of 2,000 strangers every time.</p>
+
+        <h2>How to Build Your Launch List with WhoIMetWith</h2>
+
+        <ol class="step-list">
+            <li>
+                <h4>Connect Your Calendar</h4>
+                <p>Link your Google Calendar to WhoIMetWith. We'll extract every person you've had a meeting with—going back as far as you want.</p>
+            </li>
+            <li>
+                <h4>Review Your Contact Base</h4>
+                <p>Browse through everyone you've met. Sort by date to see recent connections (warmest) or go back further for a larger pool. You'll be surprised how many people you've actually talked to.</p>
+            </li>
+            <li>
+                <h4>Create a "Launch List"</h4>
+                <p>Create a custom list called "Launch List" or "Product Hunt Launch" or whatever fits. Start adding relevant contacts.</p>
+            </li>
+            <li>
+                <h4>Segment by Relevance</h4>
+                <p>Not everyone you've met is right for your launch. Filter and select contacts who would actually care about what you're building—potential users, industry peers, supporters.</p>
+            </li>
+            <li>
+                <h4>Enrich Key Contacts</h4>
+                <p>For your most important outreach targets, use enrichment credits to get their current company, role, and LinkedIn profile. Make sure your info is up to date.</p>
+            </li>
+            <li>
+                <h4>Export and Outreach</h4>
+                <p>Export your launch list as CSV. Import into your email tool. Send personalized messages referencing when you met: "Hey Sarah, we chatted at SaaStr last year about developer tools—I finally shipped the thing we talked about..."</p>
+            </li>
+        </ol>
+
+        <h2>What Makes a Good Launch List Contact?</h2>
+
+        <h3>High Priority</h3>
+        <ul>
+            <li><strong>Potential users:</strong> People who might actually use your product</li>
+            <li><strong>Industry peers:</strong> Others in your space who understand the problem</li>
+            <li><strong>Investors you've talked to:</strong> They want to see you succeed</li>
+            <li><strong>Journalists/creators you've met:</strong> They might cover your launch</li>
+            <li><strong>Frequent contacts:</strong> People you've met multiple times (stronger relationship)</li>
+        </ul>
+
+        <h3>Medium Priority</h3>
+        <ul>
+            <li><strong>Adjacent industry contacts:</strong> May share with their network</li>
+            <li><strong>One-time meetings with good rapport:</strong> Worth a personal note</li>
+            <li><strong>Former colleagues:</strong> Generally supportive</li>
+        </ul>
+
+        <div class="warning-box">
+            <h4>Don't Add Everyone</h4>
+            <p>Resist the temptation to blast your entire contact list. People who have no reason to care about your product won't support your launch—and mass outreach damages relationships. Quality over quantity.</p>
+        </div>
+
+        <h2>Launch List Templates</h2>
+
+        <div class="highlight-box">
+            <h4>Product Hunt Launch</h4>
+            <p>Focus on: tech-savvy contacts, other founders, people active on Product Hunt, anyone who's launched before and understands the game. Timing matters—reach out 1-2 days before with a specific ask (upvote, comment, share).</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>Beta User Recruitment</h4>
+            <p>Focus on: people who fit your ICP, those who've expressed related pain points in past conversations, existing users of similar tools. Ask for feedback, not just sign-ups.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>Fundraising Announcement</h4>
+            <p>Focus on: investors you've talked to (even passes), founder friends, potential customers who care about your trajectory, journalists covering your space. A funding announcement is news—share it with people who would actually want to know.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>Content/Newsletter Launch</h4>
+            <p>Focus on: people interested in your topic, others who create similar content (potential collaborators), industry contacts who would share good content. Ask them to subscribe and share if they find it valuable.</p>
+        </div>
+
+        <h2>The Personal Touch Makes the Difference</h2>
+        <p>The magic of a warm launch list isn't just higher response rates—it's the quality of those responses. When you reach out to someone you've actually met, you can personalize:</p>
+
+        <ul>
+            <li>"Remember when we talked about X problem? I built a solution."</li>
+            <li>"You mentioned struggling with Y—this might help."</li>
+            <li>"Since our conversation at Z conference, I've been working on this."</li>
+        </ul>
+
+        <p>WhoIMetWith gives you the context you need. See when you first met, what meetings you had together, and how many times you've connected. Turn that context into personal, effective outreach.</p>
+
+        <h2>Start Building Before You Launch</h2>
+        <p>The best time to build your launch list is before you need it. Connect WhoIMetWith now, and every meeting you have from here on is automatically added to your potential launch audience.</p>
+
+        <p>When launch day comes, you won't be scrambling to remember who you know. You'll have a curated, organized list of warm contacts ready to support you.</p>
+    </article>
+
+    <section class="cta-section">
+        <h2>Your Launch List Is Already in Your Calendar</h2>
+        <p>Stop cold outreaching strangers. Start with people who already know you.</p>
+        <a href="/signup" class="btn btn-primary">Build Your List Free</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 WhoIMetWith. All rights reserved.</p>
+    </footer>
+</body>
+</html>

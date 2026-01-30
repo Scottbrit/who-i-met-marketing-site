@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhoIMetWith - Personal CRM That Builds Itself From Your Calendar</title>
+    <meta name="description" content="Automatically extract contacts from your Google Calendar meetings. Build a personal CRM without manual data entry. Track who you met, when, and how often.">
+    <meta name="keywords" content="personal CRM, calendar contact manager, networking CRM, meeting contact tracker, relationship management, automatic contact logging">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="WhoIMetWith - Your Calendar Builds Your CRM">
+    <meta property="og:description" content="Stop losing track of who you've met. WhoIMetWith automatically extracts contacts from your calendar meetings and helps you nurture professional relationships.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://whoimetwith.com">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WhoIMetWith - Personal CRM That Builds Itself">
+    <meta name="twitter:description" content="Automatically extract contacts from your Google Calendar meetings. Never forget who you met.">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://whoimetwith.com">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #06b6d4;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--background);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 640px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            margin-top: 4rem;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border);
+        }
+
+        .hero-image img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            background: var(--surface);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .social-proof p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            opacity: 0.6;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .section-header p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--secondary);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: var(--secondary);
+            color: white;
+            padding: 6rem 2rem;
+        }
+
+        .how-it-works .section-header h2 {
+            color: white;
+        }
+
+        .how-it-works .section-header p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .steps {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .step-number {
+            width: 64px;
+            height: 64px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .step p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Use Cases */
+        .use-cases {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .use-case {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .use-case-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .use-case h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .use-case p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Pricing */
+        .pricing {
+            background: var(--surface);
+            padding: 6rem 2rem;
+        }
+
+        .pricing-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 2px solid var(--border);
+            position: relative;
+        }
+
+        .pricing-card.popular {
+            border-color: var(--primary);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .pricing-card .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .pricing-card .credits {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .pricing-card li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .cta p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-links a {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            padding: 0.25rem 0;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 6rem 1rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+
+    <!-- Schema.org markup for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "WhoIMetWith",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "Personal CRM that automatically extracts contacts from your Google Calendar meetings. Track who you met, when, and how often.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "description": "Free tier available"
+        },
+        "featureList": [
+            "Google Calendar sync",
+            "Automatic contact extraction",
+            "Contact deduplication",
+            "Meeting history tracking",
+            "Contact enrichment",
+            "CSV/PDF export"
+        ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">WhoIMet<span>With</span></a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#use-cases">Use Cases</a>
+                <a href="#pricing">Pricing</a>
+                <a href="/login" class="btn btn-secondary">Log In</a>
+                <a href="/signup" class="btn btn-primary">Get Started Free</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">Your calendar already knows who you know</div>
+        <h1>Build Your Personal CRM <span>Without Typing a Thing</span></h1>
+        <p>WhoIMetWith automatically extracts every contact from your Google Calendar meetings. Know who you met, when you first connected, and how often you've talked—instantly.</p>
+        <div class="hero-cta">
+            <a href="/signup" class="btn btn-primary">Start Free — No Credit Card</a>
+            <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+        </div>
+        <div class="hero-image">
+            <!-- Placeholder for product screenshot -->
+            <div style="background: linear-gradient(135deg, #f1f5f9, #e2e8f0); height: 400px; display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+                [Product Screenshot]
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <p>Trusted by professionals at</p>
+        <div class="logos">
+            <!-- Placeholder for company logos -->
+            <span style="font-weight: 600; font-size: 1.25rem;">YC Startups</span>
+            <span style="font-weight: 600; font-size: 1.25rem;">Tech Companies</span>
+            <span style="font-weight: 600; font-size: 1.25rem;">VC Firms</span>
+            <span style="font-weight: 600; font-size: 1.25rem;">Consulting</span>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Everything You Need to Remember Everyone You've Met</h2>
+            <p>No more manual data entry. No more forgotten connections. Your calendar already has the data—we just unlock it.</p>
+        </div>
+        <div class="features-grid">
+            <article class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3>Automatic Calendar Sync</h3>
+                <p>Connect your Google Calendar and we'll extract every attendee from your past meetings. Configure your date range and watch your contact list build itself.</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Smart Deduplication</h3>
+                <p>Same person, different meetings? We automatically merge contacts by email so you see one clean profile with their complete meeting history.</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Relationship Insights</h3>
+                <p>See when you first met someone, when you last connected, and how many times you've met. Never walk into a meeting unprepared again.</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-icon">📁</div>
+                <h3>Custom Lists</h3>
+                <p>Organize contacts into lists like "Investors," "Candidates," or "Conference Contacts." Bulk add, remove, and export with ease.</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3>Contact Enrichment</h3>
+                <p>Fill in the gaps with professional data. Get LinkedIn profiles, company info, job titles, and bios powered by industry-leading data providers.</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-icon">📤</div>
+                <h3>Flexible Export</h3>
+                <p>Export your contacts or lists as CSV, JSON, or PDF. Your data is yours—take it anywhere, integrate it with anything.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-header">
+            <h2>From Calendar to CRM in 3 Steps</h2>
+            <p>Get started in under 2 minutes. No complex setup required.</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Connect Google Calendar</h3>
+                <p>Secure OAuth connection. We only read calendar data—never your emails or documents.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Choose Your Date Range</h3>
+                <p>Import meetings from the last month, year, or all time. You control what gets synced.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Explore Your Network</h3>
+                <p>Browse, search, and organize everyone you've ever met with. Enrich profiles as needed.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="use-cases" id="use-cases">
+        <div class="section-header">
+            <h2>Built for People Who Meet People</h2>
+            <p>Whether you're closing deals, raising funds, or just terrible at remembering names—we've got you.</p>
+        </div>
+        <div class="use-cases-grid">
+            <article class="use-case">
+                <div class="use-case-icon">🤝</div>
+                <div>
+                    <h3>Conference Networking</h3>
+                    <p>After the event, instantly see everyone you met and follow up while you're still top of mind.</p>
+                </div>
+            </article>
+            <article class="use-case">
+                <div class="use-case-icon">💼</div>
+                <div>
+                    <h3>Sales Pipeline</h3>
+                    <p>Track prospects you've had calls with. See meeting frequency and organize by deal stage.</p>
+                </div>
+            </article>
+            <article class="use-case">
+                <div class="use-case-icon">🎯</div>
+                <div>
+                    <h3>Recruiting</h3>
+                    <p>Maintain a list of everyone you've interviewed. Never lose track of great candidates.</p>
+                </div>
+            </article>
+            <article class="use-case">
+                <div class="use-case-icon">💰</div>
+                <div>
+                    <h3>Investor Relations</h3>
+                    <p>Track every investor touchpoint. Know exactly when you last spoke before your next meeting.</p>
+                </div>
+            </article>
+            <article class="use-case">
+                <div class="use-case-icon">🌐</div>
+                <div>
+                    <h3>Professional Networking</h3>
+                    <p>Remember context before reconnecting. "We met at the API conference in March 2024" is a powerful opener.</p>
+                </div>
+            </article>
+            <article class="use-case">
+                <div class="use-case-icon">🏢</div>
+                <div>
+                    <h3>Account Management</h3>
+                    <p>See your full meeting history with every client. Track relationship depth over time.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="section-header">
+            <h2>Simple, Transparent Pricing</h2>
+            <p>Start free. Only pay for enrichment credits when you need professional contact data.</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Free</h3>
+                <div class="price">$0</div>
+                <div class="credits">Forever free</div>
+                <ul>
+                    <li>Unlimited calendar sync</li>
+                    <li>Unlimited contacts</li>
+                    <li>Custom lists</li>
+                    <li>CSV/JSON/PDF export</li>
+                    <li>Meeting history tracking</li>
+                </ul>
+                <a href="/signup" class="btn btn-secondary" style="width: 100%;">Get Started</a>
+            </div>
+            <div class="pricing-card">
+                <h3>Starter Credits</h3>
+                <div class="price">$15</div>
+                <div class="credits">50 enrichment credits</div>
+                <ul>
+                    <li>Everything in Free</li>
+                    <li>LinkedIn profile lookup</li>
+                    <li>Company information</li>
+                    <li>Job titles & bios</li>
+                    <li>$0.30 per enrichment</li>
+                </ul>
+                <a href="/signup" class="btn btn-secondary" style="width: 100%;">Buy Credits</a>
+            </div>
+            <div class="pricing-card popular">
+                <div class="popular-badge">Best Value</div>
+                <h3>Standard Credits</h3>
+                <div class="price">$35</div>
+                <div class="credits">150 enrichment credits</div>
+                <ul>
+                    <li>Everything in Free</li>
+                    <li>LinkedIn profile lookup</li>
+                    <li>Company information</li>
+                    <li>Job titles & bios</li>
+                    <li>$0.23 per enrichment</li>
+                </ul>
+                <a href="/signup" class="btn btn-primary" style="width: 100%;">Buy Credits</a>
+            </div>
+            <div class="pricing-card">
+                <h3>Power Credits</h3>
+                <div class="price">$99</div>
+                <div class="credits">500 enrichment credits</div>
+                <ul>
+                    <li>Everything in Free</li>
+                    <li>LinkedIn profile lookup</li>
+                    <li>Company information</li>
+                    <li>Job titles & bios</li>
+                    <li>$0.20 per enrichment</li>
+                </ul>
+                <a href="/signup" class="btn btn-secondary" style="width: 100%;">Buy Credits</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <h2>Your Network Is Already in Your Calendar</h2>
+        <p>Stop letting valuable connections slip through the cracks. WhoIMetWith turns your meeting history into your most powerful networking tool.</p>
+        <a href="/signup" class="btn btn-primary">Start Free — Takes 2 Minutes</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>WhoIMetWith</h3>
+                <p>The personal CRM that builds itself from your calendar.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Product</h4>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#use-cases">Use Cases</a>
+                <a href="/changelog">Changelog</a>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <a href="/blog">Blog</a>
+                <a href="/help">Help Center</a>
+                <a href="/api">API Docs</a>
+                <a href="/integrations">Integrations</a>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 WhoIMetWith. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

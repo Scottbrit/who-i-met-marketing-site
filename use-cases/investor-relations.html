@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Investor Meetings & Manage Investor Relations | WhoIMetWith</title>
+    <meta name="description" content="Track every investor touchpoint automatically. Know when you first met, how often you've connected, and walk into every pitch fully prepared. Built for founders raising capital.">
+    <meta name="keywords" content="investor relations, track investor meetings, fundraising CRM, investor pipeline, VC meetings tracker, startup fundraising tool">
+
+    <meta property="og:title" content="Investor Relations Made Simple | WhoIMetWith">
+    <meta property="og:description" content="Track every investor touchpoint automatically. Built for founders raising capital.">
+    <meta property="og:type" content="website">
+
+    <link rel="canonical" href="https://whoimetwith.com/use-cases/investor-relations">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #06b6d4;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .hero {
+            padding: 8rem 2rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .content h2 {
+            font-size: 1.75rem;
+            margin: 3rem 0 1rem;
+            color: var(--secondary);
+        }
+
+        .content h3 {
+            font-size: 1.25rem;
+            margin: 2rem 0 0.75rem;
+            color: var(--secondary);
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .content ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: var(--surface);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box h4 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .scenario {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .scenario-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .scenario-icon {
+            font-size: 1.5rem;
+        }
+
+        .scenario h4 {
+            color: var(--secondary);
+        }
+
+        .timeline {
+            border-left: 2px solid var(--border);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -1.75rem;
+            top: 0.5rem;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .timeline-date {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .cta-section {
+            background: var(--secondary);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            background: var(--surface);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 6rem 1rem 3rem; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Track Investor Meetings: A CRM for Founders Raising Capital",
+        "description": "Learn how founders use WhoIMetWith to track investor relationships and manage their fundraising pipeline.",
+        "author": {
+            "@type": "Organization",
+            "name": "WhoIMetWith"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">WhoIMet<span>With</span></a>
+            <a href="/signup" class="btn btn-primary">Start Free</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="breadcrumb">
+            <a href="/">Home</a> / <a href="/use-cases">Use Cases</a> / Investor Relations
+        </div>
+        <h1>Track Every Investor Touchpoint Without the Spreadsheet Chaos</h1>
+        <p class="subtitle">Fundraising is a relationship game. WhoIMetWith automatically tracks every investor meeting from your calendar, so you always know where you stand.</p>
+        <a href="/signup" class="btn btn-primary">Try Free — No Credit Card</a>
+    </section>
+
+    <article class="content">
+        <h2>The Fundraising Memory Problem</h2>
+        <p>You're raising your seed round. You've taken 47 investor meetings in the past two months. A partner from a top fund emails you for a follow-up—but when did you first meet them? What did you discuss? Did they meet your co-founder already?</p>
+
+        <p>Most founders track this in spreadsheets, Notion databases, or (let's be honest) their heads. Then they walk into follow-up meetings without full context, forget who introduced whom, and lose track of where each relationship stands.</p>
+
+        <div class="highlight-box">
+            <h4>Why Investor Relationship Context Matters</h4>
+            <p>Investors talk to hundreds of founders. The ones who remember details—who introduced you, what you discussed, how many times you've met—stand out. It shows you're organized and thoughtful.</p>
+        </div>
+
+        <h2>How WhoIMetWith Works for Fundraising</h2>
+        <p>Every investor meeting in your Google Calendar becomes a tracked relationship. WhoIMetWith automatically extracts attendees and builds your investor CRM without manual data entry.</p>
+
+        <h3>What You See for Each Investor</h3>
+        <ul>
+            <li><strong>First Met Date:</strong> When you first had a meeting on your calendar</li>
+            <li><strong>Last Met Date:</strong> Your most recent touchpoint</li>
+            <li><strong>Meeting Count:</strong> Total number of meetings you've had</li>
+            <li><strong>Meeting History:</strong> Full list of every calendar event with this person</li>
+            <li><strong>Enriched Profile:</strong> LinkedIn, fund info, and bio (with enrichment credits)</li>
+        </ul>
+
+        <h2>A Typical Fundraising Journey in WhoIMetWith</h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">Week 1</div>
+                <p>You start taking intro calls. Each 30-minute Zoom appears in your calendar with the investor's email. WhoIMetWith automatically adds them to your contacts.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Week 4</div>
+                <p>You've met with 25 investors. Create a "Seed Round 2024" list and add all of them. Now you have a clean pipeline view.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Week 6</div>
+                <p>A partner requests a follow-up. Before the call, check WhoIMetWith: you first met 3 weeks ago, had a follow-up with an associate last week, and have met twice total. You're prepared.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Week 10</div>
+                <p>You close the round. Export your investor list with all meeting data for your records. The relationships you built are documented forever.</p>
+            </div>
+        </div>
+
+        <h2>Real Scenarios Founders Face</h2>
+
+        <div class="scenario">
+            <div class="scenario-header">
+                <span class="scenario-icon">📧</span>
+                <h4>"Can you remind me when we first connected?"</h4>
+            </div>
+            <p>An investor emails you after months of silence. With WhoIMetWith, you instantly see: you first met at TechCrunch Disrupt in September, had a Zoom follow-up in October, and this is your third interaction. Reply with confidence.</p>
+        </div>
+
+        <div class="scenario">
+            <div class="scenario-header">
+                <span class="scenario-icon">🤝</span>
+                <h4>"Has my co-founder met this investor yet?"</h4>
+            </div>
+            <p>You're coordinating partner meetings. Check the investor's meeting history to see if your co-founder has been on any calls with them. No more embarrassing "have you two met?" moments.</p>
+        </div>
+
+        <div class="scenario">
+            <div class="scenario-header">
+                <span class="scenario-icon">📊</span>
+                <h4>"How active is my fundraising pipeline?"</h4>
+            </div>
+            <p>Filter your investor list by meeting date. See who you've met recently vs. who's gone cold. Identify relationships that need re-warming.</p>
+        </div>
+
+        <div class="scenario">
+            <div class="scenario-header">
+                <span class="scenario-icon">📤</span>
+                <h4>"I need to share investor updates with my board"</h4>
+            </div>
+            <p>Export your investor list as a CSV or PDF. Include meeting counts and last touchpoint dates. Your board gets a clear view of fundraising activity.</p>
+        </div>
+
+        <h2>Features Built for Fundraising</h2>
+
+        <h3>Custom Lists for Pipeline Stages</h3>
+        <p>Create lists like "Warm Intros Needed," "First Meeting Done," "Partner Meeting," and "Term Sheet." Move investors between lists as conversations progress.</p>
+
+        <h3>Contact Enrichment</h3>
+        <p>Only have an investor's email from a calendar invite? Enrich their profile with:</p>
+        <ul>
+            <li>LinkedIn profile and photo</li>
+            <li>Current fund and role</li>
+            <li>Previous investments (via fund info)</li>
+            <li>Professional bio</li>
+        </ul>
+
+        <h3>Meeting History Export</h3>
+        <p>Export your complete meeting history with any investor. Useful for due diligence, board reporting, or simply remembering the journey after you close.</p>
+
+        <h3>Search and Filter</h3>
+        <p>Search by name, email, or company. Filter by meeting count (find investors you've met 3+ times) or date range (everyone you met this quarter).</p>
+
+        <h2>Why Not Just Use a Spreadsheet?</h2>
+        <p>Spreadsheets require manual entry. Every meeting, you need to remember to update it. You forget, data gets stale, and the spreadsheet becomes useless.</p>
+
+        <p>WhoIMetWith syncs with your calendar automatically. If a meeting happened, it's tracked. No discipline required. No data rot.</p>
+
+        <div class="highlight-box">
+            <h4>Investor CRM Comparison</h4>
+            <ul>
+                <li><strong>Spreadsheets:</strong> Manual entry, always out of date, no enrichment</li>
+                <li><strong>Enterprise CRM:</strong> Overkill, expensive, designed for sales teams</li>
+                <li><strong>WhoIMetWith:</strong> Automatic from calendar, built for relationships, free to start</li>
+            </ul>
+        </div>
+
+        <h2>Start Tracking Before Your Next Raise</h2>
+        <p>The best time to set up your investor tracking is before you start taking meetings. Connect your calendar now, and every future investor interaction is automatically logged.</p>
+
+        <p>Even if you're not actively raising, you're building investor relationships. Track them now so when you do raise, you have complete relationship history at your fingertips.</p>
+    </article>
+
+    <section class="cta-section">
+        <h2>Fundraising Is Hard Enough</h2>
+        <p>Don't make it harder by losing track of relationships. Let your calendar do the work.</p>
+        <a href="/signup" class="btn btn-primary">Start Free Today</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 WhoIMetWith. All rights reserved.</p>
+    </footer>
+</body>
+</html>

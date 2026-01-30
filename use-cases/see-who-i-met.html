@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>See Who I Met With - Track Meeting Contacts Automatically | WhoIMetWith</title>
+    <meta name="description" content="Can't remember who you met with last month? WhoIMetWith shows you everyone from your calendar meetings—when you first met, how often you've connected, and your complete meeting history.">
+    <meta name="keywords" content="who did I meet with, track meeting contacts, remember who I met, meeting history, calendar contacts, meeting attendees tracker">
+
+    <meta property="og:title" content="See Who You Met With - Automatic Meeting Contact Tracking">
+    <meta property="og:description" content="Your calendar knows everyone you've met. WhoIMetWith makes that information actually useful.">
+    <meta property="og:type" content="website">
+
+    <link rel="canonical" href="https://whoimetwith.com/use-cases/see-who-i-met">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .hero {
+            padding: 8rem 2rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .content h2 {
+            font-size: 1.75rem;
+            margin: 3rem 0 1rem;
+            color: var(--secondary);
+        }
+
+        .content h3 {
+            font-size: 1.25rem;
+            margin: 2rem 0 0.75rem;
+            color: var(--secondary);
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+        }
+
+        .content ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: var(--surface);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box h4 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .question-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .question-card h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .question-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .data-point {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--surface);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .data-icon {
+            font-size: 1.5rem;
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .data-point h4 {
+            margin: 0 0 0.25rem;
+            font-size: 1rem;
+        }
+
+        .data-point p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .cta-section {
+            background: var(--secondary);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            background: var(--surface);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 6rem 1rem 3rem; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "See Who You Met With: Track Meeting Contacts Automatically",
+        "description": "Learn how WhoIMetWith helps you see everyone you've met through your calendar meetings.",
+        "author": {
+            "@type": "Organization",
+            "name": "WhoIMetWith"
+        }
+    }
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">WhoIMet<span>With</span></a>
+            <a href="/signup" class="btn btn-primary">Start Free</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="breadcrumb">
+            <a href="/">Home</a> / <a href="/use-cases">Use Cases</a> / See Who I Met
+        </div>
+        <h1>"Who Did I Meet With Last Month?"</h1>
+        <p class="subtitle">Your calendar has the answer. You just can't easily see it. WhoIMetWith extracts every person from your meetings and shows you exactly who you've connected with—and when.</p>
+        <a href="/signup" class="btn btn-primary">See Your Meeting Contacts Free</a>
+    </section>
+
+    <article class="content">
+        <h2>The Question You Can't Answer</h2>
+        <p>Quick—who did you meet with in December? How about the last quarter? Who did you meet with for the first time this year?</p>
+
+        <p>These should be simple questions. You had the meetings. They're in your calendar. But scrolling through weeks of calendar entries, trying to remember names and piece together your networking activity? That's a painful waste of time.</p>
+
+        <div class="question-grid">
+            <div class="question-card">
+                <h4>"When did I first meet Sarah?"</h4>
+                <p>You know you've met before, but was it 6 months ago or 2 years? Context matters before your next conversation.</p>
+            </div>
+            <div class="question-card">
+                <h4>"Who from that company have I talked to?"</h4>
+                <p>You've had calls with multiple people there. Who exactly? And how many times each?</p>
+            </div>
+            <div class="question-card">
+                <h4>"How many new people did I meet this quarter?"</h4>
+                <p>Are you expanding your network or just talking to the same people? Hard to know without data.</p>
+            </div>
+            <div class="question-card">
+                <h4>"Who have I not talked to in a while?"</h4>
+                <p>Relationships go cold. Which ones need re-warming? Your calendar won't tell you.</p>
+            </div>
+        </div>
+
+        <h2>Your Calendar Knows. Now You Can Too.</h2>
+        <p>WhoIMetWith connects to your Google Calendar and extracts every attendee from every meeting. Instantly, you have a searchable database of everyone you've met with—organized, deduplicated, and enriched with meeting context.</p>
+
+        <h3>What You See for Each Contact</h3>
+
+        <div class="data-point">
+            <div class="data-icon">📅</div>
+            <div>
+                <h4>First Met Date</h4>
+                <p>The first time this person appeared on your calendar. Know exactly when the relationship started.</p>
+            </div>
+        </div>
+
+        <div class="data-point">
+            <div class="data-icon">🕐</div>
+            <div>
+                <h4>Last Met Date</h4>
+                <p>Your most recent meeting with them. Instantly see who you've talked to recently vs. who's gone quiet.</p>
+            </div>
+        </div>
+
+        <div class="data-point">
+            <div class="data-icon">🔢</div>
+            <div>
+                <h4>Meeting Count</h4>
+                <p>Total number of calendar events with this person. One coffee chat or 47 project meetings? Now you know.</p>
+            </div>
+        </div>
+
+        <div class="data-point">
+            <div class="data-icon">📋</div>
+            <div>
+                <h4>Full Meeting History</h4>
+                <p>Every calendar event you've had together, with dates and meeting titles. Complete context at a glance.</p>
+            </div>
+        </div>
+
+        <h2>Real Questions, Real Answers</h2>
+
+        <div class="highlight-box">
+            <h4>"I need to write my quarterly networking update"</h4>
+            <p>Filter by date range, export to CSV. You've got a complete list of everyone you met with, how often, and when. Report done in minutes, not hours.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>"Someone just emailed me and I can't remember how we know each other"</h4>
+            <p>Search by name or email. See your meeting history instantly. "Ah, we met at the product review in March and had a follow-up call in April." Now you can respond with context.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>"I'm preparing for a meeting and want to remember our history"</h4>
+            <p>Pull up the contact before your call. See when you first met, how many times you've connected, and what meetings you've had. Walk in prepared.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>"I want to see everyone I met at the conference"</h4>
+            <p>Filter by the conference dates. Everyone you had scheduled meetings with during that time appears. Add them to a "Conference 2024" list for follow-up.</p>
+        </div>
+
+        <h2>Powerful Search and Filter</h2>
+        <p>Finding who you're looking for is instant:</p>
+        <ul>
+            <li><strong>Search by name or email:</strong> Type a few characters, find the person</li>
+            <li><strong>Filter by date range:</strong> See everyone you met this week, month, quarter, or year</li>
+            <li><strong>Sort by meeting count:</strong> Find your most frequent contacts</li>
+            <li><strong>Sort by last met:</strong> Identify relationships that have gone cold</li>
+            <li><strong>Sort by first met:</strong> See your newest connections</li>
+        </ul>
+
+        <h2>Why This Matters</h2>
+        <p>Memory is unreliable. After a few weeks, you forget the details of who you met and when. After a few months, you forget you met at all. Important connections fade not because you don't care, but because you simply can't remember.</p>
+
+        <p>Your calendar is the closest thing you have to a meeting memory. Every scheduled conversation is logged with attendees, dates, and often context in the title. That data is valuable—but only if you can access it in a useful way.</p>
+
+        <p>WhoIMetWith transforms your calendar from a scheduling tool into a relationship database. The meetings you've already had become the foundation of a personal CRM that builds itself.</p>
+
+        <h2>No More "Who Was That Person?"</h2>
+        <p>Connect your calendar once. See everyone you've ever met with. It's that simple.</p>
+    </article>
+
+    <section class="cta-section">
+        <h2>Your Calendar Holds the Answers</h2>
+        <p>Stop guessing who you met with. Start knowing.</p>
+        <a href="/signup" class="btn btn-primary">See Your Contacts Free</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 WhoIMetWith. All rights reserved.</p>
+    </footer>
+</body>
+</html>
