@@ -55,8 +55,12 @@
 
     <!-- A/B Test: Hero Copy -->
     <script>
+        // Store variant globally for conversion tracking
+        window.abTestVariant = null;
+        
         posthog.onFeatureFlags(function() {
             var variant = posthog.getFeatureFlag('hero-copy-test');
+            window.abTestVariant = variant || 'control';
             
             function applyVariant() {
                 if (variant === 'dumbest-crm') {
@@ -80,7 +84,18 @@
                 // Track which variant was shown
                 posthog.capture('ab_test_impression', {
                     test_name: 'hero-copy-test',
-                    variant: variant || 'control'
+                    variant: window.abTestVariant
+                });
+                
+                // Set up conversion tracking for CTA clicks
+                document.querySelectorAll('a[href="https://app.whoimet.com/login"]').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        posthog.capture('cta_click', {
+                            test_name: 'hero-copy-test',
+                            variant: window.abTestVariant,
+                            button_text: this.textContent.trim()
+                        });
+                    });
                 });
             }
             
