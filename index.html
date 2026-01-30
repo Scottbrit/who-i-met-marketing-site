@@ -87,8 +87,11 @@
                     variant: window.abTestVariant
                 });
                 
-                // Set up conversion tracking for CTA clicks
+                // Set up conversion tracking for CTA clicks + pass variant to app
                 document.querySelectorAll('a[href="https://app.whoimet.com/login"]').forEach(function(btn) {
+                    // Add variant to URL
+                    btn.href = 'https://app.whoimet.com/login?ab_variant=' + encodeURIComponent(window.abTestVariant);
+                    
                     btn.addEventListener('click', function() {
                         posthog.capture('cta_click', {
                             test_name: 'hero-copy-test',
