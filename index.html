@@ -57,24 +57,33 @@
         posthog.onFeatureFlags(function() {
             var variant = posthog.getFeatureFlag('hero-copy-test');
             
-            if (variant === 'dumbest-crm') {
-                // Update headline
-                var badge = document.getElementById('hero-badge');
-                if (badge) {
-                    badge.textContent = 'The Dumbest Personal CRM Ever';
+            function applyVariant() {
+                if (variant === 'dumbest-crm') {
+                    // Update headline
+                    var badge = document.getElementById('hero-badge');
+                    if (badge) {
+                        badge.textContent = 'The Dumbest Personal CRM Ever';
+                    }
+                    // Update subtitle
+                    var subtitle = document.getElementById('hero-subtitle');
+                    if (subtitle) {
+                        subtitle.innerHTML = 'Your network, extracted from your calendar in 60 seconds 🤯. That\'s The App.';
+                    }
                 }
-                // Update subtitle
-                var subtitle = document.getElementById('hero-subtitle');
-                if (subtitle) {
-                    subtitle.innerHTML = 'Your network, extracted from your calendar in 60 seconds 🤯. That\'s The App.';
-                }
+                
+                // Track which variant was shown
+                posthog.capture('ab_test_impression', {
+                    test_name: 'hero-copy-test',
+                    variant: variant || 'control'
+                });
             }
             
-            // Track which variant was shown
-            posthog.capture('ab_test_impression', {
-                test_name: 'hero-copy-test',
-                variant: variant || 'control'
-            });
+            // Wait for DOM if not ready yet
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', applyVariant);
+            } else {
+                applyVariant();
+            }
         });
     </script>
 
