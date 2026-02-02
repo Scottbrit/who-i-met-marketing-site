@@ -63,23 +63,34 @@
             window.abTestVariant = variant || 'control';
 
             function applyVariant() {
+                var badge = document.getElementById('hero-badge');
+                var headline = document.getElementById('hero-headline');
+                var subtitle = document.getElementById('hero-subtitle');
+                
                 if (variant === 'contact-lists') {
-                    // Update badge
-                    var badge = document.getElementById('hero-badge');
+                    // contact-lists variant
                     if (badge) {
                         badge.textContent = 'Build contact lists from your Google Calendar';
                     }
-                    // Update h1 headline
-                    var headline = document.getElementById('hero-headline');
                     if (headline) {
-                        headline.innerHTML = 'Build contact lists from your Google Calendar <span class="emoji">📋</span>';
+                        headline.innerHTML = 'Build contact lists from your Google Calendar.';
                     }
-                    // Update subtitle
-                    var subtitle = document.getElementById('hero-subtitle');
                     if (subtitle) {
                         subtitle.innerHTML = 'Every person from every meeting you\'ve had. Extracted in 60 seconds.';
                     }
+                } else {
+                    // control variant (default) - ensure it shows Scott's exact copy
+                    if (badge) {
+                        badge.textContent = 'Calendar intelligence, supercharged';
+                    }
+                    if (headline) {
+                        headline.innerHTML = 'See everyone you\'ve ever met with.';
+                    }
+                    if (subtitle) {
+                        subtitle.innerHTML = 'Connect your Google Calendar. Get a list of every person, every meeting, instantly.';
+                    }
                 }
+            }
 
                 // Track which variant was shown
                 posthog.capture('ab_test_impression', {
@@ -1226,9 +1237,9 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="badge fade-in" id="hero-badge">Your calendar already knows your network</div>
-        <h1 class="fade-in" id="hero-headline">Your personal CRM <span class="emoji">📇</span> that builds itself</h1>
-        <p class="fade-in" id="hero-subtitle">Who I Met automatically extracts every person you've met from your Google Calendar. See who you know, when you connected, and how often you met—without typing a thing.</p>
+        <div class="badge fade-in" id="hero-badge">Calendar intelligence, supercharged</div>
+        <h1 class="fade-in" id="hero-headline">See everyone you've ever met with.</h1>
+        <p class="fade-in" id="hero-subtitle">Connect your Google Calendar. Get a list of every person, every meeting, instantly.</p>
         <div class="hero-cta fade-in">
             <a href="https://app.whoimet.com/login" class="btn btn-primary btn-large">Connect Your Calendar Free</a>
         </div>
