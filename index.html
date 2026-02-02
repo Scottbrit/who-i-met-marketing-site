@@ -63,21 +63,21 @@
             window.abTestVariant = variant || 'control';
 
             function applyVariant() {
-                if (variant === 'dumbest-crm') {
+                if (variant === 'contact-lists') {
                     // Update badge
                     var badge = document.getElementById('hero-badge');
                     if (badge) {
-                        badge.textContent = 'Your calendar already knows your network';
+                        badge.textContent = 'Build contact lists from your Google Calendar';
                     }
                     // Update h1 headline
                     var headline = document.getElementById('hero-headline');
                     if (headline) {
-                        headline.innerHTML = 'The Dumbest Personal CRM Ever <span class="emoji">📇</span>';
+                        headline.innerHTML = 'Build contact lists from your Google Calendar <span class="emoji">📋</span>';
                     }
                     // Update subtitle
                     var subtitle = document.getElementById('hero-subtitle');
                     if (subtitle) {
-                        subtitle.innerHTML = 'Your network, extracted from your calendar in 60 seconds 🤯 That\'s The App.';
+                        subtitle.innerHTML = 'Every person from every meeting you\'ve had. Extracted in 60 seconds.';
                     }
                 }
 
