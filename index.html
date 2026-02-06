@@ -53,75 +53,6 @@
         posthog.init('phc_bgDvtfCAgyf4GDe9E2gvXPr5TK8b96aFqp139HsBRn6', {api_host: 'https://us.i.posthog.com'})
     </script>
 
-    <!-- A/B Test: Hero Copy -->
-    <script>
-        // Store variant globally for conversion tracking
-        window.abTestVariant = null;
-        
-        posthog.onFeatureFlags(function() {
-            var variant = posthog.getFeatureFlag('hero-copy-test');
-            window.abTestVariant = variant || 'control';
-
-            function applyVariant() {
-                var badge = document.getElementById('hero-badge');
-                var headline = document.getElementById('hero-headline');
-                var subtitle = document.getElementById('hero-subtitle');
-                
-                if (variant === 'contact-lists') {
-                    // contact-lists variant
-                    if (badge) {
-                        badge.textContent = 'Build contact lists from your Google Calendar';
-                    }
-                    if (headline) {
-                        headline.innerHTML = 'Build contact lists from your Google Calendar.';
-                    }
-                    if (subtitle) {
-                        subtitle.innerHTML = 'Every person from every meeting you\'ve had. Extracted in 60 seconds.';
-                    }
-                } else {
-                    // control variant (default) - ensure it shows Scott's exact copy
-                    if (badge) {
-                        badge.textContent = 'Calendar intelligence, supercharged';
-                    }
-                    if (headline) {
-                        headline.innerHTML = 'Connect your Google or Outlook Calendar 📅';
-                    }
-                    if (subtitle) {
-                        subtitle.innerHTML = 'Get a list of every person, every meeting, instantly.';
-                    }
-                }
-            }
-
-                // Track which variant was shown
-                posthog.capture('ab_test_impression', {
-                    test_name: 'hero-copy-test',
-                    variant: window.abTestVariant
-                });
-
-                // Set up conversion tracking for CTA clicks + pass variant to app
-                document.querySelectorAll('a[href="https://app.whoimet.com/login"]').forEach(function(btn) {
-                    // Add variant to URL
-                    btn.href = 'https://app.whoimet.com/login?ab_variant=' + encodeURIComponent(window.abTestVariant);
-
-                    btn.addEventListener('click', function() {
-                        posthog.capture('cta_click', {
-                            test_name: 'hero-copy-test',
-                            variant: window.abTestVariant,
-                            button_text: this.textContent.trim()
-                        });
-                    });
-                });
-            }
-
-            // Wait for DOM if not ready yet
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', applyVariant);
-            } else {
-                applyVariant();
-            }
-        });
-    </script>
-
     <title>Who I Met - See Everyone You've Ever Met With</title>
     <meta name="description" content="Connect your Google Calendar. Get a list of every person, every meeting, instantly.">
 
@@ -1237,9 +1168,9 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="badge fade-in" id="hero-badge">Calendar intelligence, supercharged</div>
-        <h1 class="fade-in" id="hero-headline">Connect your Google or Outlook Calendar 📅</h1>
-        <p class="fade-in" id="hero-subtitle">Get a list of every person, every meeting, instantly.</p>
+        <div class="badge fade-in" id="hero-badge">Your calendar already knows your network</div>
+        <h1 class="fade-in" id="hero-headline">See everyone you've met with <span class="emoji">📅</span></h1>
+        <p class="fade-in" id="hero-subtitle">Connect your Google or Outlook Calendar. Get a list of every person, every meeting, instantly.</p>
         <div class="hero-cta fade-in">
             <a href="https://app.whoimet.com/login" class="btn btn-primary btn-large">Get Started</a>
         </div>
