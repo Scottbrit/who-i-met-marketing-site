@@ -1084,6 +1084,11 @@
             to { transform: rotate(360deg); }
         }
 
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .mockup-inner {
@@ -1875,6 +1880,122 @@
                 </div>
             </div>
         </div>
+        <div class="feature-row fade-in">
+            <div class="feature-content">
+                <div class="feature-badge">Mail Merge</div>
+                <h3>Send personalized emails to your lists</h3>
+                <p>Email your contacts and lists directly from WhoIMetWith—powered by your Gmail. Insert merge variables like name, company, and title so every email feels 1-to-1. Preview each message before sending, then watch them go out in real time.</p>
+                <div class="testimonial-inline">
+                    <p>"I emailed my entire investor update list in 2 minutes—each one personalized with their name and company. It felt like I wrote each one by hand."</p>
+                    <div class="author">Alex, Founder</div>
+                </div>
+            </div>
+            <div class="feature-image" id="mail-merge-demo" style="padding: 0; overflow: hidden;">
+                <!-- Mail Merge Animation -->
+                <div style="position: relative; min-height: 380px;">
+                    <!-- Compose View -->
+                    <div id="mm-compose-view" style="background-color: #f8fafc;">
+                        <!-- Toolbar -->
+                        <div style="background-color: white; padding: 10px 16px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <svg style="width: 16px; height: 16px; color: #0ea5e9;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                <span style="font-size: 13px; font-weight: 600; color: #1E3A5F;">Compose Email</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="padding: 3px 8px; background-color: #e0f2fe; border-radius: 4px; font-size: 10px; font-weight: 500; color: #0369a1;">Personalized</span>
+                                <span style="font-size: 10px; color: #6b7280;">4 recipients</span>
+                            </div>
+                        </div>
+
+                        <!-- Email Form -->
+                        <div style="padding: 12px 16px;">
+                            <!-- To field -->
+                            <div style="display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #f1f5f9;">
+                                <span style="font-size: 11px; color: #9ca3af; min-width: 24px;">To:</span>
+                                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                                    <span style="padding: 2px 8px; background-color: #e0f2fe; border-radius: 10px; font-size: 10px; color: #0369a1;">Investor Update List</span>
+                                    <span style="font-size: 10px; color: #6b7280; display: flex; align-items: center;">4 contacts</span>
+                                </div>
+                            </div>
+
+                            <!-- Subject field -->
+                            <div style="display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #f1f5f9;">
+                                <span style="font-size: 11px; color: #9ca3af; min-width: 24px;">Subj:</span>
+                                <span id="mm-subject" style="font-size: 12px; color: #111827; font-weight: 500;"></span>
+                                <span id="mm-subject-cursor" style="display: inline-block; width: 1px; height: 14px; background-color: #0ea5e9; animation: blink 1s infinite;"></span>
+                            </div>
+
+                            <!-- Body -->
+                            <div style="padding: 12px 0; min-height: 100px;">
+                                <div id="mm-body" style="font-size: 12px; color: #374151; line-height: 1.6; white-space: pre-wrap;"></div>
+                                <span id="mm-body-cursor" style="display: none; width: 1px; height: 14px; background-color: #0ea5e9; animation: blink 1s infinite;"></span>
+                            </div>
+
+                            <!-- Merge variable pills -->
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 0; border-top: 1px solid #f1f5f9;">
+                                <span style="font-size: 9px; color: #9ca3af;">Variables:</span>
+                                <span style="padding: 2px 6px; background-color: #fef3c7; border-radius: 4px; font-size: 9px; color: #92400e; font-family: monospace;">{{firstName}}</span>
+                                <span style="padding: 2px 6px; background-color: #fef3c7; border-radius: 4px; font-size: 9px; color: #92400e; font-family: monospace;">{{company}}</span>
+                                <span style="padding: 2px 6px; background-color: #fef3c7; border-radius: 4px; font-size: 9px; color: #92400e; font-family: monospace;">{{title}}</span>
+                                <span style="padding: 2px 6px; background-color: #fef3c7; border-radius: 4px; font-size: 9px; color: #92400e; font-family: monospace;">{{email}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preview View (hidden initially) -->
+                    <div id="mm-preview-view" style="background-color: #f8fafc; position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0; pointer-events: none; transition: opacity 0.3s;">
+                        <!-- Preview Header -->
+                        <div style="background-color: white; padding: 10px 16px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <svg style="width: 16px; height: 16px; color: #0ea5e9;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                                <span style="font-size: 13px; font-weight: 600; color: #1E3A5F;">Preview</span>
+                            </div>
+                            <div id="mm-preview-nav" style="display: flex; align-items: center; gap: 8px;">
+                                <span id="mm-preview-counter" style="font-size: 10px; color: #6b7280;">1 of 4</span>
+                            </div>
+                        </div>
+
+                        <!-- Preview Content -->
+                        <div style="padding: 16px;">
+                            <div style="background-color: white; border-radius: 8px; border: 1px solid #e2e8f0; padding: 16px;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                                    <div id="mm-preview-avatar" style="width: 28px; height: 28px; border-radius: 50%; background-color: #0ea5e9; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 600;">M</div>
+                                    <div>
+                                        <div id="mm-preview-name" style="font-size: 12px; font-weight: 600; color: #111827;">Marcus Chen</div>
+                                        <div id="mm-preview-email" style="font-size: 10px; color: #6b7280;">marcus@novahq.io</div>
+                                    </div>
+                                </div>
+                                <div style="border-bottom: 1px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 8px;">
+                                    <span id="mm-preview-subject" style="font-size: 12px; font-weight: 600; color: #1E3A5F;">Quick update for you, Marcus</span>
+                                </div>
+                                <div id="mm-preview-body" style="font-size: 11px; color: #374151; line-height: 1.7; white-space: pre-wrap;">Hi Marcus,
+
+Hope things are going well at NovaHQ. Wanted to share a quick update on what we've been building...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sending View (hidden initially) -->
+                    <div id="mm-sending-view" style="background-color: #f8fafc; position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0; pointer-events: none; transition: opacity 0.3s;">
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 32px;">
+                            <div id="mm-send-icon" style="width: 48px; height: 48px; border-radius: 50%; background-color: #e0f2fe; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                                <svg style="width: 24px; height: 24px; color: #0ea5e9;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                            </div>
+                            <div id="mm-send-status" style="font-size: 14px; font-weight: 600; color: #1E3A5F; margin-bottom: 8px;">Sending emails...</div>
+                            <div id="mm-send-count" style="font-size: 12px; color: #6b7280; margin-bottom: 16px;">0 of 4 sent</div>
+                            <!-- Progress bar -->
+                            <div style="width: 100%; max-width: 240px; height: 6px; background-color: #e2e8f0; border-radius: 3px; overflow: hidden; margin-bottom: 20px;">
+                                <div id="mm-send-progress" style="height: 100%; background-color: #0ea5e9; border-radius: 3px; width: 0%; transition: width 0.4s ease-out;"></div>
+                            </div>
+                            <!-- Sent indicators -->
+                            <div id="mm-sent-list" style="width: 100%; max-width: 260px; display: flex; flex-direction: column; gap: 6px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <!-- Feature Grid -->
@@ -2641,6 +2762,166 @@
 
         if (enrichDemo) {
             enrichObserver.observe(enrichDemo);
+        }
+
+        // Mail Merge Animation
+        function runMailMergeAnimation() {
+            const subjectEl = document.getElementById('mm-subject');
+            const subjectCursor = document.getElementById('mm-subject-cursor');
+            const bodyEl = document.getElementById('mm-body');
+            const bodyCursor = document.getElementById('mm-body-cursor');
+            const previewView = document.getElementById('mm-preview-view');
+            const sendingView = document.getElementById('mm-sending-view');
+            const composeView = document.getElementById('mm-compose-view');
+            const previewCounter = document.getElementById('mm-preview-counter');
+            const previewAvatar = document.getElementById('mm-preview-avatar');
+            const previewName = document.getElementById('mm-preview-name');
+            const previewEmail = document.getElementById('mm-preview-email');
+            const previewSubject = document.getElementById('mm-preview-subject');
+            const previewBody = document.getElementById('mm-preview-body');
+            const sendStatus = document.getElementById('mm-send-status');
+            const sendCount = document.getElementById('mm-send-count');
+            const sendProgress = document.getElementById('mm-send-progress');
+            const sendIcon = document.getElementById('mm-send-icon');
+            const sentList = document.getElementById('mm-sent-list');
+
+            const subject = 'Quick update for you, {{firstName}}';
+            const body = 'Hi {{firstName}},\n\nHope things are going well at {{company}}. Wanted to share a quick update on what we\'ve been building...';
+
+            const contacts = [
+                { first: 'Marcus', last: 'Chen', company: 'NovaHQ', email: 'marcus@novahq.io', color: '#0ea5e9' },
+                { first: 'Rachel', last: 'Kim', company: 'BrightPath', email: 'rachel@brightpath.co', color: '#1E3A5F' },
+                { first: 'David', last: 'Okonkwo', company: 'Luminary VC', email: 'david@luminaryvc.com', color: '#0ea5e9' },
+                { first: 'Sophie', last: 'Laurent', company: 'Greenleaf', email: 'sophie@greenleaf.com', color: '#6b7280' }
+            ];
+
+            // Reset state
+            subjectEl.textContent = '';
+            bodyEl.textContent = '';
+            subjectCursor.style.display = 'inline-block';
+            bodyCursor.style.display = 'none';
+            previewView.style.opacity = '0';
+            previewView.style.pointerEvents = 'none';
+            sendingView.style.opacity = '0';
+            sendingView.style.pointerEvents = 'none';
+            composeView.style.display = 'block';
+            sendProgress.style.width = '0%';
+            sendIcon.innerHTML = '<svg style="width: 24px; height: 24px; color: #0ea5e9;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>';
+            sendIcon.style.backgroundColor = '#e0f2fe';
+            sendStatus.textContent = 'Sending emails...';
+            sendStatus.style.color = '#1E3A5F';
+            sentList.innerHTML = '';
+
+            function typeText(el, text, speed, callback) {
+                let i = 0;
+                const interval = setInterval(() => {
+                    if (i < text.length) {
+                        // Render merge variables with highlight spans
+                        const current = text.substring(0, i + 1);
+                        el.innerHTML = current.replace(/\{\{(\w+)\}\}/g, '<span style="padding: 1px 4px; background-color: #fef3c7; border-radius: 3px; color: #92400e; font-family: monospace; font-size: 11px;">{{$1}}</span>');
+                        i++;
+                    } else {
+                        clearInterval(interval);
+                        if (callback) callback();
+                    }
+                }, speed);
+            }
+
+            // Type subject
+            setTimeout(() => {
+                typeText(subjectEl, subject, 50, () => {
+                    subjectCursor.style.display = 'none';
+                    bodyCursor.style.display = 'inline-block';
+                    // Type body
+                    setTimeout(() => {
+                        typeText(bodyEl, body, 30, () => {
+                            bodyCursor.style.display = 'none';
+                        });
+                    }, 300);
+                });
+            }, 600);
+
+            // Show preview view
+            const typeTime = 600 + (subject.length * 50) + 300 + (body.length * 30) + 800;
+            setTimeout(() => {
+                previewView.style.opacity = '1';
+                previewView.style.pointerEvents = 'auto';
+            }, typeTime);
+
+            // Cycle through contact previews
+            function showPreview(c, idx) {
+                const merged = subject.replace('{{firstName}}', c.first);
+                const mergedBody = body.replace('{{firstName}}', c.first).replace('{{company}}', c.company);
+                previewCounter.textContent = (idx + 1) + ' of 4';
+                previewAvatar.textContent = c.first[0];
+                previewAvatar.style.backgroundColor = c.color;
+                previewName.textContent = c.first + ' ' + c.last;
+                previewEmail.textContent = c.email;
+                previewSubject.textContent = merged;
+                previewBody.textContent = mergedBody;
+            }
+
+            contacts.forEach((c, i) => {
+                setTimeout(() => showPreview(c, i), typeTime + (i * 1200));
+            });
+
+            // Show sending view
+            const previewTime = typeTime + (contacts.length * 1200) + 400;
+            setTimeout(() => {
+                previewView.style.opacity = '0';
+                previewView.style.pointerEvents = 'none';
+                sendingView.style.opacity = '1';
+                sendingView.style.pointerEvents = 'auto';
+            }, previewTime);
+
+            // Animate sending each contact
+            contacts.forEach((c, i) => {
+                setTimeout(() => {
+                    const pct = ((i + 1) / contacts.length) * 100;
+                    sendProgress.style.width = pct + '%';
+                    sendCount.textContent = (i + 1) + ' of 4 sent';
+
+                    const row = document.createElement('div');
+                    row.style.cssText = 'display: flex; align-items: center; gap: 8px; padding: 6px 10px; background-color: white; border-radius: 6px; border: 1px solid #e2e8f0; opacity: 0; transform: translateY(8px); transition: all 0.3s;';
+                    row.innerHTML = '<svg style="width: 14px; height: 14px; color: #22c55e; flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>' +
+                        '<span style="font-size: 11px; color: #111827; font-weight: 500;">' + c.first + ' ' + c.last + '</span>' +
+                        '<span style="font-size: 10px; color: #6b7280; margin-left: auto;">' + c.email + '</span>';
+                    sentList.appendChild(row);
+                    requestAnimationFrame(() => {
+                        row.style.opacity = '1';
+                        row.style.transform = 'translateY(0)';
+                    });
+                }, previewTime + 400 + (i * 600));
+            });
+
+            // Show complete
+            const sendTime = previewTime + 400 + (contacts.length * 600) + 400;
+            setTimeout(() => {
+                sendStatus.textContent = 'All emails sent!';
+                sendStatus.style.color = '#22c55e';
+                sendIcon.innerHTML = '<svg style="width: 24px; height: 24px; color: #22c55e;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>';
+                sendIcon.style.backgroundColor = '#dcfce7';
+            }, sendTime);
+
+            // Restart
+            setTimeout(() => {
+                runMailMergeAnimation();
+            }, sendTime + 3500);
+        }
+
+        // Start mail merge animation when visible
+        const mailMergeDemo = document.getElementById('mail-merge-demo');
+        const mailMergeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    runMailMergeAnimation();
+                    mailMergeObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        if (mailMergeDemo) {
+            mailMergeObserver.observe(mailMergeDemo);
         }
 
         // CTA click tracking & UTM forwarding
