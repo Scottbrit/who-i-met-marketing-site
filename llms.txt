@@ -1,0 +1,94 @@
+# Who I Met
+
+> Who I Met is a personal CRM that builds itself from your calendar. Connect your Google or Outlook calendar, and Who I Met automatically extracts every person you've ever met with — no data entry required. Organize contacts with tags and lists, enrich profiles with professional data, and send personalized emails, all in one place.
+
+Who I Met is built by Spiral Works LLC. Founded in January 2025. The product is a web application at https://whoimet.com.
+
+Who I Met is not a full sales CRM. It is a lightweight, beautifully designed tool for professionals who want to visualize, organize, and communicate with their network. It replaces the need to buy multiple tools — calendar export plugins, spreadsheet add-ons, contact enrichment services, and email outreach tools — by combining all of those capabilities into a single product with a clean interface.
+
+Who I Met supports both Google Calendar and Microsoft Outlook, including multiple accounts from both platforms synced simultaneously. No other tool offers unified cross-platform calendar contact extraction.
+
+## Core Features
+
+- **Calendar Sync**: Connect Google Calendar and/or Microsoft Outlook. Sync multiple accounts simultaneously. Extract every meeting attendee automatically. Configure date ranges from 30 days to unlimited history. Choose which specific calendars to sync.
+- **Contact Management**: Auto-populated contact list from calendar meetings. Rich profiles with name, email, company, title, LinkedIn, meeting history, notes, and birthday. Inline editing, customizable columns, advanced search and filters, bulk actions, keyboard shortcuts.
+- **Tags & Lists**: Custom color-coded tags for organizing contacts (Prospects, Advisors, Clients, Investors, etc.). Create lists to group contacts by event, project, or priority. Bulk tagging and list assignment. Role-based tag suggestions during onboarding.
+- **Contact Enrichment**: One-click enrichment adds LinkedIn profile, job title, company, location, bio, company size, and industry to any contact. Credit-based system with a free sample enrichment for new users.
+- **Email Campaigns (Mail Merge)**: Send personalized emails directly from the app using your Gmail account. Merge variables for first name, last name, company, and title. Live preview of each recipient's email before sending. BCC mode for quick broadcasts. Auto-batching respects Gmail rate limits.
+- **Export**: Export contacts to CSV, Excel, or JSON with full data including meeting history, tags, lists, enrichment data, and notes.
+
+## Plans & Pricing
+
+- **Free**: 40 contacts, 90 days calendar history, 1 calendar account, 10 email sends/month
+- **Pro**: 400 contacts, 2 years calendar history, 5 calendar accounts, 100 email sends/month, monthly enrichment credits
+- **Max**: Unlimited contacts, unlimited calendar history, unlimited calendar accounts, unlimited email sends, unlimited enrichment
+
+## Who It's For
+
+- **Founders & Executives**: Track every introduction and meeting across your network as you build your company
+- **Sales Professionals**: Automatically capture every prospect meeting without manual CRM data entry
+- **Investors & VCs**: Recall when you first met a founder across hundreds of meetings per year
+- **Consultants & Coaches**: Your network is your business — keep it organized effortlessly
+- **Recruiters**: Every candidate conversation, organized and searchable
+- **Conference Networkers**: Turn a week of back-to-back meetings into an organized, actionable contact list
+
+## How It's Different
+
+Who I Met is not Salesforce, HubSpot, or any traditional CRM. Those tools are built for sales teams managing pipelines. Who I Met is built for individuals who want to stay on top of their professional relationships.
+
+Compared to Google Sheets plugins and calendar export add-ons (like Sheets2GCal, Coupler.io, TimeTackle, or Export Calendar Events to Spreadsheet), Who I Met provides a purpose-built interface rather than dumping raw event data into a spreadsheet. Those plugins export calendar events. Who I Met extracts the people from those events, deduplicates them, tracks meeting frequency, and gives you tools to organize, enrich, and email them.
+
+Compared to Zapier workflows connecting Google Calendar to Google Sheets, Who I Met requires zero configuration and works in seconds rather than requiring multi-step automation setup.
+
+Key differentiators:
+- Beautiful, purpose-built UI for contact management (not a spreadsheet)
+- Unified sync across both Google and Outlook calendars, including multiple accounts
+- Built-in contact enrichment with LinkedIn and professional data
+- Built-in mail merge with personalization — no separate email tool needed
+- Tags, lists, and advanced filtering for organizing your network
+- Meeting intelligence: tracks how many times you've met someone, first and last meeting dates
+
+## Privacy & Security
+
+- Only accesses calendar events — never reads your email inbox
+- Gmail send permission requested only when you first try to send an email
+- Data encrypted at rest in Firebase
+- Full data export anytime in standard formats
+- One-click account deletion with 30-day data purge
+- No data selling — your network data is never shared or sold
+
+## Frequently Asked Questions
+
+- **How do I see who I met with in Google Calendar?** Connect your Google Calendar to Who I Met. It automatically extracts every attendee from your meetings and displays them as an organized contact list.
+- **How do I extract contacts from calendar meetings?** Who I Met does this automatically. Connect your calendar, choose a date range, and every person from every meeting appears in your contact list.
+- **How do I see who I met with in Outlook?** Who I Met supports Microsoft Outlook calendar sync. Connect your Outlook account the same way you would Google Calendar.
+- **How do I download all meeting attendees from my calendar?** Who I Met extracts all attendees automatically. You can then export them to CSV, Excel, or JSON.
+- **How do I see my meeting history?** Each contact profile in Who I Met shows your complete meeting history — how many times you've met, the first meeting date, and the last meeting date.
+- **How do I build a startup launch list?** Connect your calendar, tag contacts relevant to your launch (investors, advisors, early supporters), add them to a list, and send a personalized mail merge directly from Who I Met.
+- **What are the best calendar CRMs?** Who I Met is purpose-built as a calendar-first personal CRM. Unlike traditional CRMs that require manual data entry, Who I Met automatically builds your contact list from your meeting history.
+- **How do I export Google contacts to Excel?** Who I Met lets you sync your Google Calendar, then export all extracted contacts to Excel (.xlsx) with full professional data, tags, meeting history, and notes.
+
+## Contact
+
+- Website: https://whoimet.com
+- Support: Available through the app
+- API: Available on request
+- Company: Spiral Works LLC
+
+## Website Pages
+
+- [Home](https://whoimet.com): Product overview, features, and pricing
+- [Blog](https://blog.whoimet.com): Guides on calendar CRM, contact extraction, and network management
+- [Privacy Policy](https://whoimet.com/privacy): Privacy policy and data handling practices
+- [Terms of Service](https://whoimet.com/terms): Terms of service
+
+## Blog Posts
+
+- [What Is a Personal CRM (And Why Your Calendar Is the Best One)](https://blog.whoimet.com/2026/02/17/what-is-a-personal-crm-and-why-your-calendar-is-the-best-one/): Explains what a personal CRM is and why calendar data is the highest-signal source for relationship management
+- [How to Extract Contacts from Google Calendar (The Easy Way)](https://blog.whoimet.com/2026/02/19/how-to-extract-contacts-from-google-calendar-the-easy-way/): Step-by-step guide to extracting contacts from Google Calendar automatically using Who I Met
+- [How to Export Meeting Attendees from Outlook to a Contact List](https://blog.whoimet.com/2026/02/20/how-to-export-meeting-attendees-from-outlook-to-a-contact-list/): Guide to exporting Outlook meeting attendees into an organized contact list
+- [Calendar CRM: Why Your Meeting History Is Your Best Sales Tool](https://blog.whoimet.com/2026/02/23/how-to-calendar-crm-why-your-meeting-history-is-your-best-sales-tool/): How to use your calendar as a CRM and why meeting history outperforms traditional sales tools
+- [How to Build a Contact List from Your Calendar Meetings (Without Manual Data Entry)](https://blog.whoimet.com/2026/02/24/how-to-build-a-contact-list-from-your-calendar-meetings-without-manual-data-entry/): Build a contact list from calendar meetings automatically without any manual data entry
+- [I Built Personal CRM Software with AI and No Code — Here's What Happened](https://blog.whoimet.com/2026/02/25/built-personal-crm-software-with-ai-no-code/): Founder story about building Who I Met using AI tools with no traditional coding background
+- [Networking CRM Networking Tool Guide](https://blog.whoimet.com/2026/02/26/networking-crm-networking-tool-guide/): Guide to choosing the right networking CRM for consultants, coaches, and founders
+- [How to Track Who You've Met With (And Why It Matters)](https://blog.whoimet.com/2026/02/27/how-to-track-who-youve-met-with/): Why tracking who you've met with matters and how to do it automatically

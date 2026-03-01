@@ -6,6 +6,9 @@ Allow: /
 # Sitemaps
 Sitemap: https://whoimetwith.com/sitemap.xml
 
+# LLMs.txt - machine-readable product info for AI assistants
+# https://whoimet.com/llms.txt
+
 # Disallow admin and private routes
 Disallow: /api/
 Disallow: /admin/
